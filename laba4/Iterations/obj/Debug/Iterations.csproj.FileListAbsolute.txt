@@ -1,0 +1,54 @@
+C:\Users\VandenReich\Google Диск\Учёба\3 Курс\Численные методы\Лаба №3\Iterations\Iterations\obj\Debug\Iterations.csprojResolveAssemblyReference.cache
+C:\Users\VandenReich\Google Диск\Учёба\3 Курс\Численные методы\Лаба №3\Iterations\Iterations\obj\Debug\Iterations.Properties.Resources.resources
+C:\Users\VandenReich\Google Диск\Учёба\3 Курс\Численные методы\Лаба №3\Iterations\Iterations\obj\Debug\Iterations.csproj.GenerateResource.Cache
+C:\Users\VandenReich\Google Диск\Учёба\3 Курс\Численные методы\Лаба №3\Iterations\Iterations\bin\Debug\Iterations.exe.config
+C:\Users\VandenReich\Google Диск\Учёба\3 Курс\Численные методы\Лаба №3\Iterations\Iterations\bin\Debug\Iterations.exe
+C:\Users\VandenReich\Google Диск\Учёба\3 Курс\Численные методы\Лаба №3\Iterations\Iterations\bin\Debug\Iterations.pdb
+C:\Users\VandenReich\Google Диск\Учёба\3 Курс\Численные методы\Лаба №3\Iterations\Iterations\obj\Debug\Iterations.exe
+C:\Users\VandenReich\Google Диск\Учёба\3 Курс\Численные методы\Лаба №3\Iterations\Iterations\obj\Debug\Iterations.pdb
+C:\Users\VandenReich\Google Диск\Учёба\3 Курс\Численные методы\Лаба №3\Iterations\Iterations\obj\Debug\SLAU.Form1.resources
+C:\Users\Mazilaa\Downloads\Iterations\Iterations\bin\Debug\Iterations.exe.config
+C:\Users\Mazilaa\Downloads\Iterations\Iterations\obj\Debug\Iterations.exe
+C:\Users\Mazilaa\Downloads\Iterations\Iterations\obj\Debug\Iterations.pdb
+C:\Users\Mazilaa\Downloads\Iterations\Iterations\obj\Debug\Iterations.csprojResolveAssemblyReference.cache
+C:\Users\Mazilaa\Downloads\Iterations\Iterations\obj\Debug\SLAU.Form1.resources
+C:\Users\Mazilaa\Downloads\Iterations\Iterations\obj\Debug\Iterations.Properties.Resources.resources
+C:\Users\Mazilaa\Downloads\Iterations\Iterations\obj\Debug\Iterations.csproj.GenerateResource.Cache
+C:\Users\Mazilaa\Downloads\Iterations\Iterations\bin\Debug\Iterations.exe
+C:\Users\Mazilaa\Downloads\Iterations\Iterations\bin\Debug\Iterations.pdb
+C:\Users\VandenReich\Downloads\Iterations\Iterations\obj\Debug\Iterations.csprojResolveAssemblyReference.cache
+C:\Users\VandenReich\Downloads\Iterations\Iterations\obj\Debug\SLAU.Form1.resources
+C:\Users\VandenReich\Downloads\Iterations\Iterations\obj\Debug\Iterations.Properties.Resources.resources
+C:\Users\VandenReich\Downloads\Iterations\Iterations\obj\Debug\Iterations.csproj.GenerateResource.Cache
+C:\Users\VandenReich\Downloads\Iterations\Iterations\obj\Debug\Iterations.exe
+C:\Users\VandenReich\Downloads\Iterations\Iterations\obj\Debug\Iterations.pdb
+C:\Users\VandenReich\Downloads\Iterations\Iterations\bin\Debug\Iterations.exe.config
+C:\Users\VandenReich\Downloads\Iterations\Iterations\bin\Debug\Iterations.exe
+C:\Users\VandenReich\Downloads\Iterations\Iterations\bin\Debug\Iterations.pdb
+C:\Users\Mazilaa\Downloads\Iterati\Iterations\bin\Debug\Iterations.exe.config
+C:\Users\Mazilaa\Downloads\Iterati\Iterations\obj\Debug\Iterations.exe
+C:\Users\Mazilaa\Downloads\Iterati\Iterations\obj\Debug\Iterations.pdb
+C:\Users\Mazilaa\Downloads\Iterati\Iterations\bin\Debug\Iterations.exe
+C:\Users\Mazilaa\Downloads\Iterati\Iterations\bin\Debug\Iterations.pdb
+C:\Users\Mazilaa\Downloads\Iterati\Iterations\obj\Debug\Iterations.csprojResolveAssemblyReference.cache
+C:\Users\Mazilaa\Downloads\Iterati\Iterations\obj\Debug\SLAU.Form1.resources
+C:\Users\Mazilaa\Downloads\Iterati\Iterations\obj\Debug\Iterations.Properties.Resources.resources
+C:\Users\Mazilaa\Downloads\Iterati\Iterations\obj\Debug\Iterations.csproj.GenerateResource.Cache
+C:\Users\Mazilaa\Downloads\Iteratipipi\Iterations\bin\Debug\Iterations.exe.config
+C:\Users\Mazilaa\Downloads\Iteratipipi\Iterations\obj\Debug\Iterations.exe
+C:\Users\Mazilaa\Downloads\Iteratipipi\Iterations\obj\Debug\Iterations.pdb
+C:\Users\Mazilaa\Downloads\Iteratipipi\Iterations\bin\Debug\Iterations.exe
+C:\Users\Mazilaa\Downloads\Iteratipipi\Iterations\bin\Debug\Iterations.pdb
+C:\Users\Mazilaa\Downloads\Iteratipipi\Iterations\obj\Debug\Iterations.csprojResolveAssemblyReference.cache
+C:\Users\Mazilaa\Downloads\Iteratipipi\Iterations\obj\Debug\SLAU.Form1.resources
+C:\Users\Mazilaa\Downloads\Iteratipipi\Iterations\obj\Debug\Iterations.Properties.Resources.resources
+C:\Users\Mazilaa\Downloads\Iteratipipi\Iterations\obj\Debug\Iterations.csproj.GenerateResource.Cache
+C:\Users\Mazilaa\Downloads\laba4\Iterations\bin\Debug\Iterations.exe.config
+C:\Users\Mazilaa\Downloads\laba4\Iterations\obj\Debug\Iterations.exe
+C:\Users\Mazilaa\Downloads\laba4\Iterations\obj\Debug\Iterations.pdb
+C:\Users\Mazilaa\Downloads\laba4\Iterations\bin\Debug\Iterations.exe
+C:\Users\Mazilaa\Downloads\laba4\Iterations\bin\Debug\Iterations.pdb
+C:\Users\Mazilaa\Downloads\laba4\Iterations\obj\Debug\Iterations.csprojResolveAssemblyReference.cache
+C:\Users\Mazilaa\Downloads\laba4\Iterations\obj\Debug\SLAU.Form1.resources
+C:\Users\Mazilaa\Downloads\laba4\Iterations\obj\Debug\Iterations.Properties.Resources.resources
+C:\Users\Mazilaa\Downloads\laba4\Iterations\obj\Debug\Iterations.csproj.GenerateResource.Cache
