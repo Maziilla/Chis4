@@ -48,48 +48,6 @@ namespace SLAU
             strList.Add("");
         }
 
-        //Открываем файл с матрицей
-        private void Open_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenFileDialog a = new OpenFileDialog();
-                a.Filter = "Текстовый(*.txt)|*.txt";
-                a.DefaultExt = "txt";
-                if (a.ShowDialog() == DialogResult.OK)
-                {
-                    strList.Clear();
-                    SolveBox.Items.Clear();
-                    SolveButton.Enabled = false;
-
-                    string[] str = File.ReadAllLines(a.FileName);
-                    n = str.Length;
-                    A = new double[n, n];
-                    kol = new int[n];
-                    for (int i = 0; i < str.Length; i++)
-                    {
-                        string[] str2 = str[i].Split(' ');
-                        for (int j = 0; j < n; j++)
-                            A[i, j] = Convert.ToDouble(str2[j]);
-                    }
-
-                    A1 = Reverse(A);
-                    SolveBox.Items.Clear();
-                    SolveBox.Items.Add("Данные успешно считаны");
-                    WriteMas(A);
-                    strList.Add("Обратная матрица:");
-                    WriteMas(A1);               
-                    chis = Norma(A) * Norma(A1);
-                    strList.Add(String.Format("Число обусловленности: {0}",chis));
-                    SolveButton.Enabled = true;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Входные данные имеют неверных формат! Убедитесь, что данные представлены ввиде матрицы");
-            }
-        }
-
         //Сохраняем решение в файл
         public void SaveFile()
         {
@@ -109,6 +67,7 @@ namespace SLAU
                 st.Close();
             }
             SolveBox.Items.Add("Решение сохранено в " + saveFile.FileName);
+            strList.Clear();
         }       
 
         //Нахождение транспонированной матрицы
@@ -207,6 +166,7 @@ namespace SLAU
                 sum += A[i] * B[i];
             return sum;
         }
+
         public void Delta(double i)
         {
             strList.Add("delta = " + Convert.ToString(i));
@@ -276,6 +236,7 @@ namespace SLAU
             }
             return null;
         }
+
         //Нахождение нормы матрицы (max)
         public double Norma(double[,] mas)
         {
@@ -301,6 +262,7 @@ namespace SLAU
             return max;
         }
 
+        //Для функции
         public double[] f_13(double[] x)
         {
             var temp = new double[n];
@@ -308,6 +270,7 @@ namespace SLAU
             temp[1] = Math.Cos(x[0]-1)+x[1]-0.7;            
             return temp;
         }
+
         public double[,] f_derivative_13(double[] x)
         {
             var temp = new double[n, n];
@@ -317,6 +280,7 @@ namespace SLAU
             temp[1, 1] = 1;
             return temp;
         }
+
         public double[] f_derivative_13_grad(double[] x_)
         {
             double x=x_[0], y=x_[1];
@@ -325,6 +289,7 @@ namespace SLAU
             temp[1] = 2*(Math.Cos(1-x)+y-0.7)+2*Math.Cos(y)*(2*x+Math.Sin(y)-2);
             return temp;
         }
+
         public double[] f_22(double[] x)
         {
             var temp = new double[n];
@@ -332,6 +297,7 @@ namespace SLAU
             temp[1] = -Math.Cos(x[1]) + x[0] - 2;
             return temp;
         }
+
         public double[,] f_derivative_22(double[] x)
         {
             var temp = new double[n, n];
@@ -341,6 +307,7 @@ namespace SLAU
             temp[1, 1] = 1;
             return temp;
         }
+
         public double f_13_grad(double[] x_)
         {
 
@@ -350,6 +317,7 @@ namespace SLAU
             temp = 4 * x * x + 4 * x * (Math.Sin(y) - 2) + Math.Pow(Math.Sin(y), 2) - 4 * Math.Sin(y) + 4.99 + 2 * y * Math.Cos(1 - x) + Math.Pow(Math.Cos(1 - x), 2) - 1.4 * Math.Cos(1 - x) + y + y - 1.4 * y;      
             return temp;
         }
+
         public double f_22_grad(double[] x_)
         {
 
@@ -359,6 +327,7 @@ namespace SLAU
             temp = x * x - 2 * x * Math.Cos(y) + 2 * y * Math.Cos(1 - x) - 4 * x + Math.Pow(Math.Cos(1 - x), 2) - 1.6 * Math.Cos(1 - x) + y * y - 1.6 * y + Math.Pow(Math.Cos(y), 2) + 4 * Math.Cos(y) + 4.64;
             return temp;
         }
+
         public double[] f_derivative_22_grad(double[] x_)
         {
             double x, y;
@@ -369,6 +338,62 @@ namespace SLAU
             temp[1] = 2 * (Math.Cos(1 - x) + y - 0.8) + 2 * Math.Sin(y) * (x - Math.Cos(y) - 2);
             return temp;
         }
+
+        //Метод простых итераций
+        public void SimpleIter()
+        {
+            double[] x_new, x_old, pogreshnost;
+            x_new = new double[n];
+            x_old = new double[n];
+            var T = 0.99;
+            pogreshnost = new double[n];
+            double delta = 0;
+            int k = 0;
+            strList.Add("");
+            strList.Add("Метод простых итераций:");
+            if (rb_13.Checked)
+            {
+                x_old[0] = 1;
+                x_old[1] = 0;
+                strList.Add("Начальные значения: Х = " + x_old[0] + " Y = " + x_old[1]);
+                strList.Add(String.Format("|  №  |        x          |         y         |        норма      |         q         |", "№", "x1", "y"));
+                strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|", k, x_old[0], x_old[1], delta));
+                do
+                {
+                    k++;
+                    for (int i = 0; i < n; i++)
+                        x_new[i] = x_old[i] - Multiplication(T, f_13(x_old))[i];
+                    for (int i = 0; i < n; i++)
+                        pogreshnost[i] = Math.Abs(x_new[i] - x_old[i]);
+                    delta = Norma(pogreshnost);
+                    x_old = (double[])x_new.Clone();
+                    strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|", k, x_old[0], x_old[1], delta));
+                }
+                while (delta > E);
+            }
+            else
+            {
+                x_old[0] = 2;
+                x_old[1] = 0;
+                strList.Add("Начальные значения: Х = " + x_old[0] + " Y = " + x_old[1]);
+                strList.Add(String.Format("|  №  |        x          |         y         |        норма      |         q         |", "№", "x1", "y"));
+                strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|", k, x_old[0], x_old[1], delta));
+                do
+                {
+                    for (int i = 0; i < n; i++)
+                        x_new[i] = x_old[i] - Multiplication(T, f_22(x_old))[i];
+                    for (int i = 0; i < n; i++)
+                        pogreshnost[i] = Math.Abs(x_new[i] - x_old[i]);
+                    delta = Norma(pogreshnost);
+                    x_old = (double[])x_new.Clone();
+                    strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|", k, x_old[0], x_old[1], delta));
+                    k++;
+                }
+                while (delta > E);
+                b = (double[])x_old.Clone();
+            }
+        }
+
         //Метод Ньютона
         public void Niuton()
         {          
@@ -379,14 +404,15 @@ namespace SLAU
             pogreshnost = new double[n];
             double delta = 0;
             int k = 0;
+            strList.Add("");
             strList.Add("Метод Ньютона:");           
             if (rb_13.Checked)
             {
                 x_old[0] = 1;
                 x_old[1] = 0;
                 strList.Add("Начальные значения: Х = " + x_old[0] + " Y = " + x_old[1]);
-                strList.Add(String.Format("|  №  |        x1         |         y         |        норма      |         q         |", "№", "x1", "y"));
-                strList.Add(String.Format("|{0,4} |{1,19}|{2,19}|{3,19}|", k, x_old[0], x_old[1], delta));
+                strList.Add(String.Format("|  №  |        x          |         y         |        норма      |         q         |", "№", "x1", "y"));
+                strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|", k, x_old[0], x_old[1], delta));
                 do
                 {
                     k++;
@@ -396,8 +422,7 @@ namespace SLAU
                         pogreshnost[i] = Math.Abs(x_new[i] - x_old[i]);
                     delta = Norma(pogreshnost);
                     x_old = (double[])x_new.Clone();
-                    strList.Add(String.Format("|{0,4} |{1,19}|{2,19}|{3,19}|", k, x_old[0], x_old[1], delta));
-                    
+                    strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|", k, x_old[0], x_old[1], delta));
                 }
                 while (delta > E);
             }
@@ -406,8 +431,8 @@ namespace SLAU
                 x_old[0] = 2;
                 x_old[1] = 0;
                 strList.Add("Начальные значения: Х = " + x_old[0] + " Y = " + x_old[1]);
-                strList.Add(String.Format("|  №  |        x1         |         y         |        норма      |         q         |", "№", "x1", "y"));
-                strList.Add(String.Format("|{0,4} |{1,19}|{2,19}|{3,19}|", k, x_old[0], x_old[1], delta));
+                strList.Add(String.Format("|  №  |        x          |         y         |        норма      |         q         |", "№", "x1", "y"));
+                strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|", k, x_old[0], x_old[1], delta));
                 do
                 {
                     for (int i = 0; i < n; i++)
@@ -416,14 +441,15 @@ namespace SLAU
                         pogreshnost[i] = Math.Abs(x_new[i] - x_old[i]);
                     delta = Norma(pogreshnost);
                     x_old = (double[])x_new.Clone();
-                    strList.Add(String.Format("|{0,4} |{1,19}|{2,19}|{3,19}|", k, x_old[0], x_old[1], delta));
+                    strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|", k, x_old[0], x_old[1], delta));
                     k++;
                 }
                 while (delta > E);
                 b = (double[])x_old.Clone();
             }              
-
         }
+
+        //Метод градиента
         public void Grad()
         {
             double[] x_new, x_old, pogreshnost;
@@ -436,6 +462,7 @@ namespace SLAU
             double stop,lambda,Ak_norm;
             double Ak,Ak_;
             int min = 99999, k = 0;
+            strList.Add("");
             strList.Add("Метод градиентного спуска:");
             if (rb_13.Checked)
             {
@@ -445,7 +472,7 @@ namespace SLAU
                 lambda = 0.9;
                 strList.Add("Начальные значения: Х = " + x_old[0] + " Y = " + x_old[1]);
                 strList.Add(String.Format("|  №  |        x         |         y         |        норма      |       альфа       |", "№", "x", "y"));
-                strList.Add(String.Format("|{0,4} |{1,19}|{2,19}|{3,19}|{4,19}", k, x_old[0], x_old[1], delta, Ak));
+                strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|{4,22}|", k, x_old[0], x_old[1], delta, Ak));
                 do
                 {
                     k++;
@@ -462,7 +489,7 @@ namespace SLAU
                     delta = Norma(pogreshnost);
                     stop = Math.Abs(f_13_grad(x_new) - f_13_grad(x_old));
                     x_old = (double[])x_new.Clone();
-                    strList.Add(String.Format("|{0,4} |{1,19}|{2,19}|{3,19}|{4,19}|", k, x_old[0], x_old[1], delta, Ak));
+                    strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|{4,22}|", k, x_old[0], x_old[1], delta, Ak));
 
                 }
                 while (stop > E);
@@ -504,14 +531,14 @@ namespace SLAU
                     if (kek < lol) { lol = kek; rip = Ak_; }
                 }
                 while (Norma(Subtraction(b, x_old)) > E && Ak_ > 0.001);
-                
+                k=0;
                 lambda = 0.99;
                 x_old[0] = 2;
                 x_old[1] = 0;
                 strList.Add("Начальные значения: Х = " + x_old[0] + " Y = " + x_old[1]);
-                strList.Add(String.Format("|  №  |        x1         |         y         |        норма      |       альфа       |", "№", "x1", "y"));
+                strList.Add(String.Format("|  №  |        x          |         y         |        норма      |       альфа       |", "№", "x1", "y"));
                 Ak = rip;
-                strList.Add(String.Format("|{0,4} |{1,19}|{2,19}|{3,19}|{4,19}", k, x_old[0], x_old[1], delta, Ak));
+                strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|{4,22}|", k, x_old[0], x_old[1], delta, Ak));
                 do
                 {
                     k++;
@@ -528,18 +555,16 @@ namespace SLAU
                     delta = Norma(pogreshnost);
                     stop = Math.Abs(f_22_grad(x_new) - f_22_grad(x_old));
                     x_old = (double[])x_new.Clone();
-                    strList.Add(String.Format("|{0,4} |{1,19}|{2,19}|{3,19}|{4,19}|", k, x_old[0], x_old[1], stop, Ak));                    
+                    strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|{4,22}|", k, x_old[0], x_old[1], stop, Ak));                    
                 }
                 while (stop > E);
             }
-
         }
-
-        //Для нормы 
 
         //Решение уравнения
         private void SolveButton_Click(object sender, EventArgs e)
         {
+            SimpleIter();
             Niuton();
             Grad();
             SaveFile();
