@@ -339,6 +339,24 @@ namespace SLAU
             return temp;
         }
 
+        public double[] f_13_reverse(double[] x_)
+        {
+            var temp = new double[n];
+            temp[0] = 1 - Math.Sin(x_[1]) / 2;
+            temp[1] = 0.7 - Math.Cos(x_[0] - 1);
+            return temp;
+        }
+
+        public double[] f_22_reverse(double[] x_)
+        {
+            var temp = new double[n];
+            //temp[0] = Math.Acos(0.8 - x_[1]) + 1;
+            //temp[1] = Math.Acos(x_[0] - 2);
+            temp[0] = 2 + Math.Cos(x_[1]);
+            temp[1] = 0.8 - Math.Cos(x_[0] - 1);
+            return temp;
+        }
+
         //Метод простых итераций
         public void SimpleIter()
         {
@@ -349,20 +367,20 @@ namespace SLAU
             pogreshnost = new double[n];
             double delta = 0;
             int k = 0;
-            strList.Add("");
             strList.Add("Метод простых итераций:");
             if (rb_13.Checked)
             {
                 x_old[0] = 1;
                 x_old[1] = 0;
                 strList.Add("Начальные значения: Х = " + x_old[0] + " Y = " + x_old[1]);
-                strList.Add(String.Format("|  №  |        x          |         y         |        норма      |         q         |", "№", "x1", "y"));
+                strList.Add(String.Format("|  №  |          x           |           y          |         норма        |           q          |", "№", "x1", "y"));
                 strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|", k, x_old[0], x_old[1], delta));
                 do
                 {
                     k++;
                     for (int i = 0; i < n; i++)
-                        x_new[i] = x_old[i] - Multiplication(T, f_13(x_old))[i];
+                        //x_new[i] = x_old[i] - Multiplication(T, f_13(x_old))[i];
+                        x_new[i] = f_13_reverse(x_old)[i];
                     for (int i = 0; i < n; i++)
                         pogreshnost[i] = Math.Abs(x_new[i] - x_old[i]);
                     delta = Norma(pogreshnost);
@@ -374,14 +392,15 @@ namespace SLAU
             else
             {
                 x_old[0] = 2;
-                x_old[1] = 0;
+                x_old[1] = 1;
                 strList.Add("Начальные значения: Х = " + x_old[0] + " Y = " + x_old[1]);
-                strList.Add(String.Format("|  №  |        x          |         y         |        норма      |         q         |", "№", "x1", "y"));
+                strList.Add(String.Format("|  №  |          x           |           y          |         норма        |           q          |", "№", "x1", "y"));
                 strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|", k, x_old[0], x_old[1], delta));
                 do
                 {
                     for (int i = 0; i < n; i++)
-                        x_new[i] = x_old[i] - Multiplication(T, f_22(x_old))[i];
+                        //x_new[i] = x_old[i] - Multiplication(T, f_22(x_old))[i];
+                        x_new[i] = f_22_reverse(x_old)[i];
                     for (int i = 0; i < n; i++)
                         pogreshnost[i] = Math.Abs(x_new[i] - x_old[i]);
                     delta = Norma(pogreshnost);
@@ -429,7 +448,7 @@ namespace SLAU
             else
             {
                 x_old[0] = 2;
-                x_old[1] = 0;
+                x_old[1] = 1;
                 strList.Add("Начальные значения: Х = " + x_old[0] + " Y = " + x_old[1]);
                 strList.Add(String.Format("|  №  |        x          |         y         |        норма      |         q         |", "№", "x1", "y"));
                 strList.Add(String.Format("|{0,4} |{1,22}|{2,22}|{3,22}|", k, x_old[0], x_old[1], delta));
@@ -455,13 +474,11 @@ namespace SLAU
             double[] x_new, x_old, pogreshnost;
             x_new = new double[n];
             x_old = new double[n];
-            x_old[0] = 2;
-            x_old[1] = 0;
             pogreshnost = new double[n];
             double delta = 0;
-            double stop,lambda,Ak_norm;
+            double stop,lambda;
             double Ak,Ak_;
-            int min = 99999, k = 0;
+            int k = 0;
             strList.Add("");
             strList.Add("Метод градиентного спуска:");
             if (rb_13.Checked)
@@ -506,7 +523,7 @@ namespace SLAU
                     Ak_ = Ak_ - 0.001;
                     lambda = 0.90;
                     x_old[0] = 2;
-                    x_old[1] = 0;
+                    x_old[1] = 1;
                     x_new[0] = 0; x_new[1] = 0;
                     k = 0;
                     do
@@ -534,7 +551,7 @@ namespace SLAU
                 k=0;
                 lambda = 0.99;
                 x_old[0] = 2;
-                x_old[1] = 0;
+                x_old[1] = 1;
                 strList.Add("Начальные значения: Х = " + x_old[0] + " Y = " + x_old[1]);
                 strList.Add(String.Format("|  №  |        x          |         y         |        норма      |       альфа       |", "№", "x1", "y"));
                 Ak = rip;
